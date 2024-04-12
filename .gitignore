@@ -127,3 +127,5 @@ dist
 .pnp.*
 
 .angular
+node_modules
+backend/resources/assets/*
