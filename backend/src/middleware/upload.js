@@ -1,19 +1,15 @@
 const util = require("util");
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 const maxSize = 108 * 1024 * 1024;
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const date = new Date();
-    console.log(
-      path.join(
-        global.__basedir +
-          "/resources/assets/upload/" +
-          date.toISOString().substring(0, 10)
-      )
-    );
-    cb(null, path.join(global.__basedir + "/resources/assets/upload"));
+    date = new Date();
+    const location = path.join(global.__basedir + "/resources/assets/upload/");
+
+    cb(null, location);
   },
   filename: (req, file, cb) => {
     console.log(file.originalname);

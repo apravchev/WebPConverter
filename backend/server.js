@@ -13,6 +13,7 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/public"));
 // Routes
 app.use("/api", require("./src/routes/api"));
 // Start the server

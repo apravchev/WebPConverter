@@ -1,3 +1,4 @@
+const UploadedFile = require("../models/upload.model");
 const uploadFile = require("../middleware/upload");
 const upload = async (req, res) => {
   try {
@@ -5,8 +6,15 @@ const upload = async (req, res) => {
     if (req.files == undefined) {
       return res.status(400).send({ message: "Please upload a file!" });
     }
+    const files = [];
+    if (Array.isArray(req.files)) {
+      req.files.forEach((file) => {
+        files.push(new UploadedFile(file.filename, file.size, file.path));
+      });
+    }
     res.status(200).send({
       message: "Uploaded the files successfully: ",
+      files,
     });
   } catch (err) {
     res.status(500).send({
