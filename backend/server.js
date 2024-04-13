@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = process.env.PORT || 3000;
 global.__basedir = __dirname;
+global.__PORT = PORT;
 // Middleware
 app.use(
   cors({
@@ -13,7 +14,7 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/public"));
+app.use("/public", express.static(__dirname + "/public/assets/upload"));
 // Routes
 app.use("/api", require("./src/routes/api"));
 // Start the server

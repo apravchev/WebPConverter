@@ -2,6 +2,11 @@ import { NgClass, NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ImageHandlerService } from '../../services/image_handler.service';
 import { first } from 'rxjs';
+import { ApiResponse } from '../../models/api.response.model';
+import { UploadedFile } from '../../models/uploaded.file.model';
+import { GlobalService } from '../../services/global.service';
+import { Store } from '@ngrx/store';
+import { UploadActions } from '../../store/actions/upload.actions';
 
 @Component({
   selector: 'app-file-upload',
@@ -15,10 +20,14 @@ export class FileUploadComponent {
   @Input() fileFormats: String = '';
   expand = false;
   invalidFile = false;
-  files: File[] = [];
-  constructor(private iService: ImageHandlerService) {}
+  files: UploadedFile[] = [];
+  host = this.gService.BASE_URL;
+  constructor(
+    private iService: ImageHandlerService,
+    private gService: GlobalService,
+    private store: Store
+  ) {}
   postFiles(res: Event | any) {
-    console.log(res.files);
     if (!!res.target.files) {
       if (res.target.files.length > 0) {
         const uploaded: FileList = res.target.files || [];
@@ -29,9 +38,7 @@ export class FileUploadComponent {
         if (filtered.length <= 0) {
           this.invalidFile = true;
         } else {
-          this.files = filtered;
-          console.log(this.files);
-          this.iService.uploadFiles(this.files).pipe(first()).subscribe();
+          this.store.dispatch(UploadActions.attempt({ files: filtered }));
         }
       }
     }

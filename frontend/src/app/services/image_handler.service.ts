@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GlobalService } from './global.service';
+import { Observable } from 'rxjs';
+import { ApiResponse } from '../models/api.response.model';
 
 @Injectable({ providedIn: 'root' })
 export class ImageHandlerService {
-  uploadFiles = (files: File[]) => {
-    const data: FormData = new FormData();
-    files.forEach((file) => data.append('files', file, file.name));
+  uploadFiles = (data: FormData) => {
     return this.http.post(this.global.API_URL + '/files', data, {
       reportProgress: true,
       responseType: 'json',

@@ -7,9 +7,13 @@ const upload = async (req, res) => {
       return res.status(400).send({ message: "Please upload a file!" });
     }
     const files = [];
+
     if (Array.isArray(req.files)) {
       req.files.forEach((file) => {
-        files.push(new UploadedFile(file.filename, file.size, file.path));
+        console.log(file.path);
+        files.push(
+          new UploadedFile(file.filename, file.size, `public/${file.filename}`)
+        );
       });
     }
     res.status(200).send({

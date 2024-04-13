@@ -5,12 +5,18 @@ import { routes } from './app.routes';
 
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideHttpClient } from '@angular/common/http';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { UploadEffects } from './store/effects/upload.effects';
+import { UPLOAD_REDUCER } from './store/reducers/upload.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideStoreDevtools({ maxAge: 25, logOnly: false }),
+    provideStore({ upload: UPLOAD_REDUCER }),
+    provideEffects(UploadEffects),
     provideAnimations(),
     provideHttpClient(),
+    provideStoreDevtools({ maxAge: 25 }),
   ],
 };
