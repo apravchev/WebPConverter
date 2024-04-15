@@ -13,7 +13,7 @@ import { UPLOAD_REDUCER } from './store/reducers/upload.reducer';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideStore({ upload: UPLOAD_REDUCER }),
+    provideStore({ Upload: UPLOAD_REDUCER }),
     provideEffects(UploadEffects),
     provideAnimations(),
     provideHttpClient(),

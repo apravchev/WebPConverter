@@ -10,5 +10,7 @@
     ></app-file-upload>
   </div>
 
-  <div class="row"></div>
+  <div class="row">
+    <app-images-grid [images]="(images | async) || []"></app-images-grid>
+  </div>
 </div>

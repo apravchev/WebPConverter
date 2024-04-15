@@ -1,8 +1,6 @@
+import { UploadedFile } from './uploaded.file.model';
+
 export class ApiResponse {
   message: String = '';
-  files?: {
-    name: String;
-    location: String;
-    size: number;
-  }[];
+  files?: UploadedFile[];
 }

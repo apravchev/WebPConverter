@@ -12,11 +12,12 @@
         </button>
       </nav>
       <div
-        [@triggerName]="prepareRoute(outlet)"
         class="d-flex position-relative main-window justify-content-center align-items-center"
       >
         <div class="window position-absolute"></div>
-        <router-outlet #outlet="outlet"></router-outlet>
+        <div class="main">
+          <router-outlet #outlet="outlet"></router-outlet>
+        </div>
       </div>
     </div>
   </div>

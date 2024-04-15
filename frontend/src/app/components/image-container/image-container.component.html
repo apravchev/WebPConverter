@@ -1,5 +1,19 @@
-<div>
-  <ng-container [ngIf]="!!image">
-    <img src="image." alt="" />
-  </ng-container>
-</div>
+<ng-container *ngIf="!!image">
+  <div
+    [ngClass]="{ 'opacity-0': !display, 'opacity-1': display }"
+    class="image-item"
+  >
+    <img (load)="display = true" [src]="host + image.location" alt="Image" />
+    <div class="image-overlay">
+      <div class="overlay-content">
+        <button
+          class="action-button delete-button"
+          (click)="deleteImage(image)"
+        >
+          <i class="bi bi-trash-fill"></i>
+        </button>
+      </div>
+    </div>
+    <p class="image-filename">{{ image.fileName | filename }}</p>
+  </div>
+</ng-container>

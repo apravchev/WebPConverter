@@ -22,11 +22,7 @@ export class FileUploadComponent {
   invalidFile = false;
   files: UploadedFile[] = [];
   host = this.gService.BASE_URL;
-  constructor(
-    private iService: ImageHandlerService,
-    private gService: GlobalService,
-    private store: Store
-  ) {}
+  constructor(private gService: GlobalService, private store: Store) {}
   postFiles(res: Event | any) {
     if (!!res.target.files) {
       if (res.target.files.length > 0) {

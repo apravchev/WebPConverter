@@ -3,19 +3,13 @@ const uploadFile = require("../middleware/upload");
 const upload = async (req, res) => {
   try {
     await uploadFile(req, res);
-    if (req.files == undefined) {
+    if (!req.files || req.files.length === 0) {
       return res.status(400).send({ message: "Please upload a file!" });
     }
-    const files = [];
-
-    if (Array.isArray(req.files)) {
-      req.files.forEach((file) => {
-        console.log(file.path);
-        files.push(
-          new UploadedFile(file.filename, file.size, `public/${file.filename}`)
-        );
-      });
-    }
+    const files = req.files.map(
+      (file) =>
+        new UploadedFile(file.filename, file.size, `public/${file.filename}`)
+    );
     res.status(200).send({
       message: "Uploaded the files successfully: ",
       files,
@@ -26,42 +20,23 @@ const upload = async (req, res) => {
     });
   }
 };
+
 const getListFiles = (req, res) => {
   const directoryPath = __basedir + "/resources/static/assets/uploads/";
 
-  fs.readdir(directoryPath, function (err, files) {
+  fs.readdir(directoryPath, (err, files) => {
     if (err) {
-      res.status(500).send({
+      return res.status(500).send({
         message: "Unable to scan files!",
       });
     }
 
-    let fileInfos = [];
-
-    files.forEach((file) => {
-      fileInfos.push({
-        name: file,
-        url: baseUrl + file,
-      });
-    });
+    const fileInfos = files.map((file) => ({
+      name: file,
+      url: baseUrl + file,
+    }));
 
     res.status(200).send(fileInfos);
   });
 };
-const download = (req, res) => {
-  const fileName = req.params.name;
-  const directoryPath = __basedir + "/resources/static/assets/uploads/";
-
-  res.download(directoryPath + fileName, fileName, (err) => {
-    if (err) {
-      res.status(500).send({
-        message: "Could not download the file. " + err,
-      });
-    }
-  });
-};
-module.exports = {
-  upload,
-  getListFiles,
-  download,
-};
+module.exports = { upload, getListFiles };

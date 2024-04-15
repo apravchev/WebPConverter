@@ -8,10 +8,19 @@
   left: 0;
   top: 0;
   z-index: -1;
+  background: url("../assets/imgs/background.jpg");
+  background-size: 300%;
+  background-repeat: no-repeat;
+  // -webkit-user-select: none;
+  -webkit-app-region: drag;
 }
 .main-window {
   min-height: 500px;
   padding: 20px;
+}
+.main {
+  z-index: 1;
+  -webkit-app-region: none;
 }
 nav button {
   position: relative;
@@ -37,4 +46,8 @@ nav button {
   z-index: -1;
   border-radius: 20px 20px 0 0;
   border: 1px solid black;
+}
+nav {
+  // -webkit-user-select: none;
+  // -webkit-app-region: drag;
 }

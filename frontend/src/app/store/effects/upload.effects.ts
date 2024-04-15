@@ -2,24 +2,29 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UploadActions } from '../actions/upload.actions';
 import { ImageHandlerService } from '../../services/image_handler.service';
-import { exhaustMap, first, map } from 'rxjs';
-import { ApiResponse } from '../../models/api.response.model';
+import { Observable, catchError, exhaustMap, first, map, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UploadEffects {
+  private uploadFiles(files: File[]): Observable<any> {
+    const formData = new FormData();
+    files.forEach((file) => formData.append('files', file));
+    return this.ihService
+      .uploadFiles(formData)
+      .pipe(catchError((error) => of(error)));
+  }
   onFilesUpload$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UploadActions.attempt),
-      exhaustMap((res) => {
-        const data: FormData = new FormData();
-        res.files.forEach((file) => data.append('files', file, file.name));
-        return this.ihService.uploadFiles(data).pipe(
-          first(),
-          map((res: any) => ({ type: '[Upload] success', res }))
-        );
-      })
+      exhaustMap((action) =>
+        this.uploadFiles(action.files).pipe(
+          map((res: any) => UploadActions.success({ res })),
+          first()
+        )
+      )
     )
   );
+
   constructor(
     private actions$: Actions,
     private ihService: ImageHandlerService
