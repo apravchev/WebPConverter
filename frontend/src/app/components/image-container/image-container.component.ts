@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { UploadedFile } from '../../models/uploaded.file.model';
 import { NgClass, NgIf } from '@angular/common';
 import { GlobalService } from '../../services/global.service';

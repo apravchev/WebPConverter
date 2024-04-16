@@ -1,23 +1,21 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ImageHandlerService } from '../../services/image_handler.service';
-import { first } from 'rxjs';
-import { ApiResponse } from '../../models/api.response.model';
 import { UploadedFile } from '../../models/uploaded.file.model';
 import { GlobalService } from '../../services/global.service';
 import { Store } from '@ngrx/store';
 import { UploadActions } from '../../store/actions/upload.actions';
 
 @Component({
-  selector: 'app-file-upload',
+  selector: 'app-file-handling',
   standalone: true,
   imports: [NgFor, NgClass],
-  templateUrl: './file-upload.component.html',
-  styleUrl: './file-upload.component.scss',
+  templateUrl: './file-handling.component.html',
+  styleUrl: './file-handling.component.scss',
   providers: [FileReader],
 })
-export class FileUploadComponent {
+export class FileHandlingComponent {
   @Input() fileFormats: String = '';
+  @Input() hasFiles: boolean = false;
   expand = false;
   invalidFile = false;
   files: UploadedFile[] = [];

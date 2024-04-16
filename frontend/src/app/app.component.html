@@ -1,15 +1,39 @@
 <div class="vh-100 vw-100 d-flex">
-  <div class="container-lg m-auto">
+  <div class="m-auto w-100">
     <div class="d-flex flex-column">
       <nav class="d-flex nav-bar">
-        <button routerLinkActive="active" routerLink="/to-webp" class="">
-          <div class="btn-bg"></div>
-          IMG/GIF->WEBP
-        </button>
-        <button routerLinkActive="active" routerLink="/from-webp" class="">
-          <div class="btn-bg"></div>
-          WEBP->IMG
-        </button>
+        <div class="nav-buttons d-flex">
+          <button
+            routerLinkActive="active"
+            routerLink="/"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class=""
+          >
+            <i class="bi bi-house"></i>
+          </button>
+          <button
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class=""
+          >
+            <i class="bi bi-image"></i>
+          </button>
+          <button routerLinkActive="active" routerLink="/to-webp" class="">
+            <i class="bi bi-arrow-right-short"></i>WEBP
+          </button>
+          <button routerLinkActive="active" routerLink="/from-webp" class="">
+            <i class="bi bi-arrow-right-short"></i>IMG
+          </button>
+        </div>
+        <div class="drag-bar"></div>
+        <div class="control-buttons d-flex ms-auto">
+          <button class="minimise" (click)="minimise()">
+            <i class="bi bi-dash"></i>
+          </button>
+          <button class="close" (click)="close()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
       </nav>
       <div
         class="d-flex position-relative main-window justify-content-center align-items-center"

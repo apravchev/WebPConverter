@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\" \"npm run start:electron\"",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:electron\"",
     "start:backend": "cd ../backend && node server.js",
     "start:frontend": "cd ../frontend && ng serve",
     "start:electron": "electron ."

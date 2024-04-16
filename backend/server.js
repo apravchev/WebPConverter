@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const multer = require("multer");
 const bodyParser = require("body-parser");
 const compression = require("./src/middleware/compression");
 const app = express();

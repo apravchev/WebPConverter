@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { routeTransitionAnimations } from './animations/route-transition';
 import { ImageHandlerService } from './services/image_handler.service';
-import { HttpClient } from '@angular/common/http';
+import { ElectronService } from './services/electron.service';
 
 @Component({
   selector: 'app-root',
@@ -19,4 +19,16 @@ export class AppComponent {
     return outlet.activatedRouteData['animationState'];
   }
   title = 'WebpConverter';
+  minimise() {
+    this.eService.sendMessage('minimise');
+  }
+  close() {
+    this.eService.sendMessage('close');
+  }
+  constructor(private eService: ElectronService) {
+    var userAgent = navigator.userAgent.toLowerCase();
+    if (userAgent.indexOf(' electron/') > -1) {
+      this.eService.setElectronInstance(require('electron'));
+    }
+  }
 }

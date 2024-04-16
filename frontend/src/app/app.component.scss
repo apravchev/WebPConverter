@@ -1,6 +1,6 @@
 .main-window .window {
-  border-radius: 0 20px 20px 20px;
-  background-color: rgba(243, 243, 243, 0.438);
+  border-radius: 0 0 20px 20px;
+  background-color: #202225;
   backdrop-filter: blur(5px);
   border: 1px solid rgb(36, 36, 36);
   height: 100%;
@@ -8,7 +8,8 @@
   left: 0;
   top: 0;
   z-index: -1;
-  background: url("../assets/imgs/background.jpg");
+  // background: url("../assets/imgs/background.jpg");
+  background-color: var(--primary-color);
   background-size: 300%;
   background-repeat: no-repeat;
   // -webkit-user-select: none;
@@ -30,24 +31,48 @@ nav button {
   padding: 5px 10px;
   font-size: 16px;
   font-weight: bold;
-  background-color: transparent;
+  transition: 0.25s;
+  background-color: var(--primary-color);
+  color: var(--tetiary-color);
   border: none;
-  &.active .btn-bg {
-    background-color: rgba(243, 243, 243, 0.774);
+  &.active {
+    background-color: var(--tetiary-color);
+    color: black;
+  }
+  &:hover {
+    background-color: var(--secondary-color);
   }
 }
-.btn-bg {
-  position: absolute;
-  width: 100%;
-  transition: 0.5s;
-  height: 100%;
-  background-color: rgba(243, 243, 243, 0.438);
-  backdrop-filter: blur(5px);
-  z-index: -1;
-  border-radius: 20px 20px 0 0;
-  border: 1px solid black;
+.control-buttons button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  background-color: var(--primary-color);
+  z-index: 1;
+}
+.minimise {
+  color: white;
+}
+.close {
+  color: white;
 }
 nav {
-  // -webkit-user-select: none;
-  // -webkit-app-region: drag;
+  background-color: var(--primary-color);
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  position: relative;
+}
+.nav-buttons {
+  z-index: 1;
+  position: relative;
+}
+.drag-bar {
+  flex-grow: 1;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
 }
