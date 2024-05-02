@@ -1,7 +1,8 @@
-const ImageFile = require("../models/ImageFile");
+const ImageFile = require("../models").ImageFile;
 
 class ImageRepository {
   async createImage(name, size, location, dateAdded) {
+    console.log(name, size, location);
     return await ImageFile.create({ name, size, location, dateAdded });
   }
 

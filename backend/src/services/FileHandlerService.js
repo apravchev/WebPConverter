@@ -24,7 +24,11 @@ class FileHandlerService {
             file.size,
             `public/${file.filename}`,
             new Date()
-          )
+          ).catch((err) => {
+            if (err) {
+              console.log(err);
+            }
+          })
       );
       res.status(200).send({
         message: "Uploaded the files successfully: ",
