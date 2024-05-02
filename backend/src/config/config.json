@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "wbp_admin",
+    "password": "test",
+    "database": "wbpconv",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "wbp_admin",
+    "password": "test",
+    "database": "wbpconv",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

@@ -39,7 +39,7 @@ nav button {
     background-color: var(--tetiary-color);
     color: black;
   }
-  &:hover {
+  &:hover:not(.active) {
     background-color: var(--secondary-color);
   }
 }

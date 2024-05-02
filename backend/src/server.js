@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const compression = require("./src/middleware/compression");
+const compression = require("./middleware/compression");
 const app = express();
 const PORT = process.env.PORT || 3000;
+const db = require("./models");
 global.__basedir = __dirname;
 global.__PORT = PORT;
 // Middleware
@@ -14,11 +15,13 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/public/", express.static(__dirname + "/public/assets/upload"));
 app.use(compression);
+app.use("/public/", express.static(__dirname + "/public/assets/upload"));
 // Routes
-app.use("/api", require("./src/routes/api"));
+app.use("/api", require("./routes/api"));
 // Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+db.sequelize.sync().then((req) => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
 });
