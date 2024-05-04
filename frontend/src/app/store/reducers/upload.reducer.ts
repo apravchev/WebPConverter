@@ -1,9 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { UploadedFile } from '../../models/uploaded.file.model';
+import { FileInfo } from '../../models/fileInfo';
 import { UploadActions } from '../actions/upload.actions';
 
 class UploadStatus {
-  files?: UploadedFile[];
+  files?: FileInfo[];
   pages = 0;
   current = 0;
   perPage = 0;

@@ -1,16 +1,8 @@
 const ImageRepository = require("../repositories/imageRepository");
 const uploadFile = require("../middleware/upload");
+const FileInfo = require("../models").FileInfo;
 class FileHandlerService {
   constructor() {}
-  createImageFile(name, size, location, dateAdded) {
-    const image = ImageFile.create({
-      name,
-      size,
-      location,
-      dateAdded,
-    });
-    return image;
-  }
   upload = async (req, res) => {
     try {
       await uploadFile(req, res);
@@ -20,10 +12,11 @@ class FileHandlerService {
       const files = req.files.map(
         async (file) =>
           await ImageRepository.createImage(
-            file.filename,
-            file.size,
-            `public/${file.filename}`,
-            new Date()
+            FileInfo.build({
+              name: file.filename,
+              size: file.size,
+              path: `public/${file.filename}`,
+            })
           ).catch((err) => {
             if (err) {
               console.log(err);

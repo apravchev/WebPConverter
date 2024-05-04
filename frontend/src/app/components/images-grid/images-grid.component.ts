@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { UploadedFile } from '../../models/uploaded.file.model';
+import { FileInfo } from '../../models/fileInfo';
 import { CommonModule } from '@angular/common';
 import { ImageContainerComponent } from '../image-container/image-container.component';
 
@@ -11,7 +11,7 @@ import { ImageContainerComponent } from '../image-container/image-container.comp
   styleUrl: './images-grid.component.scss',
 })
 export class ImagesGridComponent {
-  @Input() images: UploadedFile[] = [];
+  @Input() images: FileInfo[] = [];
   style: 'vertical' | 'grid' = 'vertical';
   constructor() {}
 }

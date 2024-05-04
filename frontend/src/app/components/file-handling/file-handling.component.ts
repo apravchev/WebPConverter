@@ -1,6 +1,6 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { UploadedFile } from '../../models/uploaded.file.model';
+import { FileInfo } from '../../models/fileInfo';
 import { GlobalService } from '../../services/global.service';
 import { Store } from '@ngrx/store';
 import { UploadActions } from '../../store/actions/upload.actions';
@@ -18,7 +18,7 @@ export class FileHandlingComponent {
   @Input() hasFiles: boolean = false;
   expand = false;
   invalidFile = false;
-  files: UploadedFile[] = [];
+  files: FileInfo[] = [];
   host = this.gService.BASE_URL;
   constructor(private gService: GlobalService, private store: Store) {}
   postFiles(res: Event | any) {

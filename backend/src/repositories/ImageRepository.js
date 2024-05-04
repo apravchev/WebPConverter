@@ -1,13 +1,12 @@
-const ImageFile = require("../models").ImageFile;
+const FileInfo = require("../models").FileInfo;
 
 class ImageRepository {
-  async createImage(name, size, location, dateAdded) {
-    console.log(name, size, location);
-    return await ImageFile.create({ name, size, location, dateAdded });
+  async createImage(FileInst) {
+    return await FileInst.save();
   }
 
   async getImageById(id) {
-    return await ImageFile.findByPk(id);
+    return await FileInfo.findByPk(id);
   }
 }
 module.exports = new ImageRepository();

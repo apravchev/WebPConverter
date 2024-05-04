@@ -1,5 +1,5 @@
 import { createActionGroup, props } from '@ngrx/store';
-import { ApiResponse } from '../../models/api.response.model';
+import { ApiResponse } from '../../models/response';
 
 export const UploadActions = createActionGroup({
   source: 'Upload',

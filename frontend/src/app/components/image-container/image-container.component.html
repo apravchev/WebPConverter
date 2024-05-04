@@ -3,7 +3,7 @@
     [ngClass]="{ 'opacity-0': !display, 'opacity-1': display }"
     class="image-item"
   >
-    <img (load)="display = true" [src]="host + image.location" alt="Image" />
+    <img (load)="display = true" [src]="host + image.path" alt="Image" />
     <div class="image-overlay">
       <div class="overlay-content">
         <button
@@ -14,6 +14,6 @@
         </button>
       </div>
     </div>
-    <p class="image-filename">{{ image.fileName | filename }}</p>
+    <p class="image-filename">{{ image.name | filename }}</p>
   </div>
 </ng-container>
