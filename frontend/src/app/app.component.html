@@ -1,57 +1,43 @@
-<div class="vh-100 vw-100 d-flex">
-  <div class="m-auto w-100 h-100">
-    <div class="d-flex flex-column h-100">
-      <nav class="d-flex nav-bar">
-        <div class="nav-buttons d-flex">
-          <button
-            routerLinkActive="active"
-            routerLink="/"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class=""
-          >
-            <i class="bi bi-house"></i>
-          </button>
-          <button
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class=""
-            routerLink="/to-webp"
-          >
-            <i class="bi bi-image"></i>
-          </button>
-          <button
-            routerLinkActive="active"
-            routerLink="/settings"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class=""
-          >
-            <i class="bi bi-gear"></i>
-          </button>
-          <!-- <button routerLinkActive="active" routerLink="/to-webp" class="">
-            <i class="bi bi-arrow-right-short"></i>WEBP
-          </button>
-          <button routerLinkActive="active" routerLink="/from-webp" class="">
-            <i class="bi bi-arrow-right-short"></i>IMG
-          </button> -->
-        </div>
-        <div class="drag-bar"></div>
-        <div class="control-buttons d-flex ms-auto">
-          <button class="minimise" (click)="minimise()">
-            <i class="bi bi-dash"></i>
-          </button>
-          <button class="close" (click)="close()">
-            <i class="bi bi-x-lg"></i>
-          </button>
-        </div>
-      </nav>
-      <div
-        class="d-flex position-relative main-window justify-content-center align-items-center"
+<div class="app">
+  <nav class="control">
+    <button class="bi bi-dash"></button>
+    <button class="bi bi-square"></button>
+    <button class="bi bi-x"></button>
+  </nav>
+  <div class="app-window">
+    <nav class="card navigation">
+      <button
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active"
+        routerLink="/"
+        class="bi bi-house"
       >
-        <div class="window position-absolute"></div>
-        <div class="main">
-          <router-outlet #outlet="outlet"></router-outlet>
-        </div>
-      </div>
+        Home
+      </button>
+      <button
+        routerLinkActive="active"
+        routerLink="/gallery"
+        class="bi bi-image"
+      >
+        Gallery
+      </button>
+      <button
+        routerLinkActive="active"
+        routerLink="/settings"
+        class="bi bi-gear"
+      >
+        Settings
+      </button>
+      <button
+        routerLinkActive="active"
+        routerLink="/about"
+        class="bi bi-info-circle mt-auto"
+      >
+        About
+      </button>
+    </nav>
+    <div class="router card">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

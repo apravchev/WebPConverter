@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
-import { ImgToWebpComponent } from './views/img-to-webp/img-to-webp.component';
-import { FromWebpComponent } from './views/from-webp/from-webp.component';
+
 import { SettingsComponent } from './views/settings/settings.component';
+import { GalleryComponent } from './views/gallery/gallery.component';
 
 export const routes: Routes = [
   {
@@ -11,15 +11,6 @@ export const routes: Routes = [
     loadComponent: () => HomeComponent,
     data: { animationState: '1' },
   },
-  {
-    path: 'to-webp',
-    loadComponent: () => ImgToWebpComponent,
-    data: { animationState: '2' },
-  },
-  {
-    path: 'from-webp',
-    loadComponent: () => FromWebpComponent,
-    data: { animationState: '3' },
-  },
   { path: 'settings', loadComponent: () => SettingsComponent },
+  { path: 'gallery', loadComponent: () => GalleryComponent },
 ];
