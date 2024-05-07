@@ -1,11 +1,11 @@
 <div class="app">
   <nav class="control">
     <button class="bi bi-dash"></button>
-    <button class="bi bi-square"></button>
-    <button class="bi bi-x"></button>
+    <button class="bi bi-app"></button>
+    <button class="bi bi-x-lg"></button>
   </nav>
   <div class="app-window">
-    <nav class="card navigation">
+    <nav class="card navigation hoverable">
       <button
         [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="active"
@@ -36,7 +36,7 @@
         About
       </button>
     </nav>
-    <div class="router card">
+    <div (drop)="logEvent($event)" class="router card">
       <router-outlet></router-outlet>
     </div>
   </div>

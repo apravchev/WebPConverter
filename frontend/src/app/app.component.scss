@@ -1,19 +1,25 @@
 .control {
-  box-shadow: 2px 2px 2px 2px rgba(15, 1, 1, 0.822);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.459);
   border-radius: 0 0 0 20px;
-  background-color: #c3c3c3;
+  background-color: #81d8bfb0;
   display: flex;
   justify-content: end;
   align-items: center;
+  height: 35px;
+
   button {
+    height: 100%;
+    width: 45px;
     transition: 0.5s;
     background-color: rgba(255, 255, 255, 0);
     border: 0;
+
     &:hover {
       background-color: rgba(255, 255, 255, 0.534);
     }
   }
 }
+
 .app-window {
   width: 100%;
   height: 100%;
@@ -23,6 +29,7 @@
   padding: 20px;
   background-color: transparent;
 }
+
 .router {
   width: 100%;
   height: 100%;
@@ -42,33 +49,70 @@
   flex-direction: column;
   overflow: hidden;
 }
+
 .navigation {
   display: flex;
   justify-content: start;
   align-items: center;
   flex-direction: column;
   gap: var(--distance);
-}
-.navigation button {
-  font-size: 24px;
-  width: 100%;
-  border-radius: 20px;
-  border: 0;
-  padding: 20px 10px;
-  gap: 10px;
-  background-color: rgba(255, 255, 255, 0.342);
-  box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.178);
-  display: flex;
-  transition: background-color 0.5s, box-shadow 0.5s;
-  justify-content: start;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
-  &:hover {
-    box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.527);
-  }
-  &.active {
-    background-color: white;
-    box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.527);
+
+  button {
+    font-size: 24px;
+    width: 100%;
+    border-radius: 20px;
+    border: 0;
+    padding: 20px 10px;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.342);
+    box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.178);
+    display: flex;
+    transition: background-color 0.5s, box-shadow 0.5s;
+    justify-content: start;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+
+    &::after {
+      width: 120%;
+      height: 100%;
+      content: "";
+      top: 0;
+      left: 0;
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        opacity 0.5s;
+      opacity: 0;
+      background-color: rgba(255, 255, 255, 0.322);
+      border-radius: 20px;
+      position: absolute;
+      transform-origin: left;
+      transform: scaleX(0);
+      z-index: -1;
+    }
+
+    &:hover {
+      box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.527);
+
+      &:not(.active)::after {
+        opacity: 1;
+        transform: scaleX(0.5);
+      }
+    }
+
+    &:active {
+      &:not(.active)::after {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
+
+    &.active {
+      &::after {
+        display: none;
+      }
+      background-color: white;
+      box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.527);
+    }
   }
 }

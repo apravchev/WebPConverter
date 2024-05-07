@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+body {
+  font-family: "Economica", sans-serif;
+}
+@font-face {
+  font-family: "Cornerstone";
+  src: url("../assets/fonts/Cornerstone.ttf") format("truetype");
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-family: "Cornerstone", sans-serif;
+}
+h1 {
+  font-size: 64px;
+  font-weight: bold;
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+}
+p {
+  font-size: 32px;
+  font-weight: 600 !important;
+  max-width: 400px;
+  line-height: 1.5;
+  font-weight: 500;
+}

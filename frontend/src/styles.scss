@@ -1,42 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
 @import url("../node_modules/bootstrap-icons/font/bootstrap-icons.css");
-:root {
-  --primary-color: #303841;
-  --secondary-color: #3a4750;
-  --tetiary-color: #f6c90e;
-  --misc-color: #eeeeee;
-  --distance: 10px;
-}
-.bg-main {
-  background: transparent;
-  background-size: 300%;
-  background-repeat: no-repeat;
-}
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
-body {
-  font-family: "Inter", sans-serif;
-}
+@import url("./styles/colors.scss");
+@import url("./styles/typography.scss");
+@import url("./styles/components.scss");
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-button {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-}
+button,
+p,
 h1 {
-  letter-spacing: -1.5px;
-  line-height: 1.2;
-}
-p {
-  font-size: 16px;
-  max-width: 400px;
-  line-height: 1.5;
   margin: 0;
 }
 body,
@@ -45,30 +16,8 @@ html {
   height: 100%;
   width: 100%;
 }
-.page,
-.section {
-  display: flex;
-  flex-direction: column;
-
-  align-items: start;
-  gap: var(--distance);
-}
-.page {
-  height: 100%;
-  width: 100%;
-}
-.section {
-  margin-top: var(--distance);
-}
 .ng-star-inserted {
   width: 100%;
   height: 100%;
-}
-.card {
-  border: 1px solid rgba(0, 0, 0, 0.575);
-  box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.568);
-  background-color: rgba(255, 255, 255, 0.164);
-  backdrop-filter: blur(0.5);
-  padding: var(--distance);
-  border-radius: 20px;
+  z-index: 1;
 }

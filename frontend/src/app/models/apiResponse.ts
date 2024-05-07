@@ -1,6 +1,6 @@
 import { FileInfo } from './fileInfo';
 
-export class ApiResponse {
+export abstract class ApiResponse {
   message: String = '';
-  files?: FileInfo[];
+  status: number = 400;
 }

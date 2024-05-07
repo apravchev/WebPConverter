@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GlobalService } from './global.service';
 import { Observable } from 'rxjs';
-import { ApiResponse } from '../models/response';
+import { ApiResponse } from '../models/apiResponse';
 
 @Injectable({ providedIn: 'root' })
 export class ImageHandlerService {

@@ -8,12 +8,11 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { UploadEffects } from './store/effects/upload.effects';
-import { UPLOAD_REDUCER } from './store/reducers/upload.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideStore({ Upload: UPLOAD_REDUCER }),
+    provideStore({}),
     provideEffects(UploadEffects),
     provideAnimations(),
     provideHttpClient(),

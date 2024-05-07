@@ -20,15 +20,18 @@ export class AppComponent {
   }
   title = 'WebpConverter';
   minimise() {
-    this.eService.sendMessage('minimise');
+    this.eService?.sendMessage('minimise');
   }
   close() {
-    this.eService.sendMessage('close');
+    this.eService?.sendMessage('close');
   }
   constructor(private eService: ElectronService) {
     var userAgent = navigator.userAgent.toLowerCase();
-    if (userAgent.indexOf(' electron/') > -1) {
+    if (userAgent.indexOf('electron/') > -1) {
       this.eService.setElectronInstance(require('electron'));
     }
+  }
+  logEvent(ev: any) {
+    console.log(ev);
   }
 }
