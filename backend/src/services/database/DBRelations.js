@@ -9,27 +9,21 @@ class DatabaseRelationsService {
   }
   createOneToOne(one, two) {
     one.hasOne(two);
+    two.belongsTo(one);
   }
   createAssociations() {
     const { FileInfo, FileFormat, ConversionConfiguration, ConversionInfo } =
       this.models;
-
-    // Formats / Configs - O-M
-    FileFormat.belongsTo(ConversionConfiguration);
-    ConversionConfiguration.hasMany(FileFormat);
-    // - Conversion Relations
-    ConversionInfo.belongsTo(FileInfo, {
+    this.createOneToMany(FileFormat, FileInfo);
+    this.createOneToMany(FileFormat, ConversionConfiguration);
+    FileInfo.belongsToMany(FileInfo, {
+      through: ConversionInfo,
+      otherKey: "converted_id",
       foreignKey: "original_id",
+      as: "converted_id",
     });
-    ConversionInfo.belongsTo(FileInfo, {
-      foreignKey: "converted_id",
-    });
-    ConversionInfo.belongsTo(ConversionConfiguration, {
-      foreignKey: "config_id",
-    });
-    FileInfo.hasMany(ConversionInfo);
-    FileInfo.hasOne(FileFormat);
-    FileInfo.hasMany(ConversionConfiguration);
+    ConversionConfiguration.hasMany(ConversionInfo);
+    ConversionInfo.belongsTo(ConversionConfiguration);
   }
 }
 module.exports = DatabaseRelationsService;

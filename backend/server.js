@@ -25,7 +25,7 @@ app.use(
 // Routes
 app.use("/api", require("./src/routes/api"));
 // Start the server
-db.sequelize.sync().then((req) => {
+db.sequelize.sync({ force: true }).then((req) => {
   app.listen(PORT, () => {
     initialize().then(
       console.log(`Server Initialized and running on port : ${PORT}`)
