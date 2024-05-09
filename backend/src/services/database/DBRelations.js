@@ -21,7 +21,7 @@ class DatabaseRelationsService {
       foreignKey: "config_id",
     });
     FileInfo.hasMany(ConversionInfo);
-    FileInfo.hasMany(FileFormat);
+    FileInfo.hasOne(FileFormat);
     FileInfo.hasMany(ConversionConfiguration);
   }
 }

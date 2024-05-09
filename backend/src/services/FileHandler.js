@@ -1,6 +1,11 @@
 const ImageRepository = require("../repositories/imageRepository");
 const uploadFile = require("../middleware/upload");
+const { promisify } = require("util");
 const FileInfo = require("../models").FileInfo;
+const fs = require("fs");
+const path = require("path");
+const readdir = promisify(fs.readdir);
+const stat = promisify(fs.stat);
 class FileHandlerService {
   constructor() {}
   upload = async (req, res) => {
@@ -9,7 +14,7 @@ class FileHandlerService {
       if (!req.files || req.files.length === 0) {
         return res.status(400).send({ message: "Please upload a file!" });
       }
-      const files = req.files.map(
+      req.files.forEach(
         async (file) =>
           await ImageRepository.createImage(
             FileInfo.build({
@@ -25,32 +30,28 @@ class FileHandlerService {
       );
       res.status(200).send({
         message: "Uploaded the files successfully: ",
-        files,
       });
     } catch (err) {
       res.status(500).send({
-        message: `Could not upload the files:  ${err}`,
+        message: `Could not upload the files: ${err}`,
       });
     }
   };
   // TODO
-  getMultiple = (req, res) => {
-    const directoryPath = __basedir + "/resources/static/assets/uploads/";
-
-    fs.readdir(directoryPath, (err, files) => {
-      if (err) {
-        return res.status(500).send({
-          message: "Unable to scan files!",
-        });
-      }
-
-      const fileInfos = files.map((file) => ({
-        name: file,
-        url: baseUrl + file,
-      }));
-
-      res.status(200).send(fileInfos);
-    });
-  };
+  async getAll() {
+    const directoryPath = __basedir + "/public/assets/upload/";
+    const files = await readdir(directoryPath);
+    const pathContent = Promise.all(
+      files.map(async (file) => {
+        const stats = await stat(directoryPath + file);
+        return {
+          name: file,
+          path: __basedir + file,
+          size: stats?.size,
+        };
+      })
+    );
+    return pathContent;
+  }
 }
 module.exports = new FileHandlerService();

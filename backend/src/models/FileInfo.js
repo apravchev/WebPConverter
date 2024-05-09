@@ -7,6 +7,11 @@ module.exports = (sequelize, DataTypes) => {
       size: { type: DataTypes.INTEGER, allowNull: false },
       path: { type: DataTypes.STRING, allowNull: false },
     },
-    { sequelize, tableName: "files", underscored: true }
+    {
+      sequelize,
+      tableName: "files",
+      underscored: true,
+      indexes: [{ unique: true, fields: ["name", "path"], name: "full_path" }],
+    }
   );
 };
