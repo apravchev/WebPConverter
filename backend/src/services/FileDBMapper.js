@@ -7,22 +7,24 @@ class FileDBMapper {
   }
   async sync() {
     const files = await this.fhService.getAll();
-    const fileInfos = await this.iRepo.getAllImages();
-    console.log("List of files " + files);
-    if (Array.isArray(files) && Array.isArray(fileInfos)) {
+    if (Array.isArray(files)) {
       await this.iRepo.createMultiple(files);
       const dbFiles = await this.iRepo.getAllImages();
-      const ids = [];
-      dbFiles.forEach((file) => {
-        if (
-          !files.find((item) => {
-            return item.name == file.name && item.path == file.path;
-          })
-        ) {
-          ids.push(file.id);
+      if (dbFiles.length !== files.length) {
+        const ids = [];
+        dbFiles.forEach((file) => {
+          if (
+            !files.find((item) => {
+              return item.name == file.name && item.path == file.path;
+            })
+          ) {
+            ids.push(file.id);
+          }
+        });
+        if (ids.length > 0) {
+          await this.iRepo.deleteMatchingIds(ids);
         }
-      });
-      await this.iRepo.deleteMatchingIds(ids);
+      }
     }
     return files;
   }

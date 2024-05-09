@@ -39,14 +39,14 @@ class FileHandlerService {
   };
   // TODO
   async getAll() {
-    const directoryPath = __basedir + "/public/assets/upload/";
+    const directoryPath = path.join(__basedir, "/public/assets/upload/");
     const files = await readdir(directoryPath);
     const pathContent = Promise.all(
       files.map(async (file) => {
-        const stats = await stat(directoryPath + file);
+        const stats = await stat(path.join(directoryPath, file));
         return {
           name: file,
-          path: __basedir + file,
+          path: path.join(__basedir, file),
           size: stats?.size,
         };
       })

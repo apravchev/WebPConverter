@@ -3,6 +3,13 @@ class DatabaseRelationsService {
   constructor(models) {
     this.models = models;
   }
+  createOneToMany(one, many) {
+    many.belongsTo(one);
+    one.hasMany(many);
+  }
+  createOneToOne(one, two) {
+    one.hasOne(two);
+  }
   createAssociations() {
     const { FileInfo, FileFormat, ConversionConfiguration, ConversionInfo } =
       this.models;
