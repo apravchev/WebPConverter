@@ -1,0 +1,43 @@
+@keyframes shiftbg {
+  from {
+    background-position: -50px;
+  }
+  to {
+    background-position: -500px;
+  }
+}
+.drop-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  align-items: center;
+  &.active .drop-prompt {
+    display: flex;
+  }
+  .drop-prompt {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    &::after {
+      z-index: -1;
+      content: "";
+      background: linear-gradient(
+          90deg,
+          rgba(216, 129, 153, 1) 16%,
+          rgba(148, 129, 216, 1) 84%
+        )
+        no-repeat;
+      background-size: 200%;
+      animation: shiftbg 2s alternate both infinite ease-in-out;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+  }
+}
+.active {
+}

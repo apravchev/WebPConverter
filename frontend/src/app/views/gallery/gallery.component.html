@@ -1,5 +1,15 @@
 <div class="page">
-  <h1>Gallery</h1>
-  <p>Drag and drop files to start working</p>
-  <app-images-grid></app-images-grid>
+  <div class="query-bar card w-100">
+    <app-image-filter></app-image-filter>
+  </div>
+  <div
+    [ngClass]="{ active: active }"
+    (drop)="onDrop($event); active = false"
+    (dragover)="onDragOver($event); active = true"
+    (dragend)="active = false"
+    class="card h-100 w-100 drop-area"
+  >
+    <div (dragleave)="active = false" class="drop-prompt">Drop Files Here</div>
+    <app-images-grid [images]="(images | async) || []"></app-images-grid>
+  </div>
 </div>

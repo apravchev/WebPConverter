@@ -1,17 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GlobalService } from './global.service';
-import { Observable } from 'rxjs';
-import { ApiResponse } from '../models/apiResponse';
 
 @Injectable({ providedIn: 'root' })
 export class ImageHandlerService {
-  uploadFiles = (data: FormData) => {
-    return this.http.post(this.global.API_URL + '/files', data, {
+  uploadFData = (data: FormData) => {
+    return this.http.post(this.global.API_URL + '/images', data, {
       reportProgress: true,
       responseType: 'json',
     });
   };
-
+  getImages = () => {
+    return this.http.get(this.global.API_URL + '/images', {
+      reportProgress: true,
+      responseType: 'json',
+    });
+  };
   constructor(private http: HttpClient, private global: GlobalService) {}
 }

@@ -1,6 +1,7 @@
-import { createReducer } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { FileFilter } from '../../models/fileFilter';
 import { FileInfo } from '../../models/fileInfo';
+import { GalleryActions } from '../actions/gallery.actions';
 
 export class GalleryState {
   files: FileInfo[] = [];
@@ -23,4 +24,13 @@ const initialState: GalleryState = {
   total: 1,
   filter: { format: false, search: false, date: false, size: false },
 };
-export const GalleryReducer = createReducer(initialState);
+export const GalleryReducer = createReducer(
+  initialState,
+  on(GalleryActions.loadsuccess, (state, res) => ({
+    ...state,
+    files: res.files,
+    loaded: true,
+    page: res.page || 1,
+    count: res.count || 0,
+  }))
+);

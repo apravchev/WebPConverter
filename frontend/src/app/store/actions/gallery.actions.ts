@@ -10,6 +10,6 @@ export const GalleryActions = createActionGroup({
       total: number;
       count: number;
       files: FileInfo[];
-    }>,
+    }>(),
   },
 });

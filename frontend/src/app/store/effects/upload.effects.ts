@@ -10,7 +10,7 @@ export class UploadEffects {
     const formData = new FormData();
     files.forEach((file) => formData.append('files', file));
     return this.ihService
-      .uploadFiles(formData)
+      .uploadFData(formData)
       .pipe(catchError((error) => of(error)));
   }
   onFilesUpload$ = createEffect(() =>
