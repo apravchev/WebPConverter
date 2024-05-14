@@ -1,5 +1,8 @@
 const FileInfo = require("../models").FileInfo;
 const { Op } = require("sequelize");
+/**
+ * Handles Database Image Entires
+ */
 class ImageRepository {
   async createImage(FileInst) {
     return await FileInst.save();

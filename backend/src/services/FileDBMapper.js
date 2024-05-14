@@ -1,12 +1,12 @@
 class FileDBMapper {
-  fhService;
+  iService;
   iRepo;
   constructor() {
-    this.fhService = require("./FileHandler");
+    this.iService = require("./ImageService");
     this.iRepo = require("../repositories/imageRepository");
   }
   async sync() {
-    const files = await this.fhService.getAll();
+    const files = await this.iService._getAll();
     if (Array.isArray(files)) {
       await this.iRepo.createMultiple(files);
       const dbFiles = await this.iRepo.getAllImages();
