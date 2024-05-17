@@ -7,11 +7,9 @@ let storage = multer.diskStorage({
   destination: (req, file, cb) => {
     date = new Date();
     const location = path.join(global.__basedir, "/public/assets/upload");
-    console.log(location);
     cb(null, location);
   },
   filename: (req, file, cb) => {
-    console.log(file.originalname);
     cb(null, file.originalname);
   },
 });

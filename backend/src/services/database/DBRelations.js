@@ -1,23 +1,35 @@
+const { DataTypes } = require("sequelize");
+
 class DatabaseRelationsService {
   models;
   constructor(models) {
     this.models = models;
   }
-  createOneToMany(one, many) {
-    one.hasMany(many);
-    many.belongsTo(one);
+  createOneToMany(one, many, nullable = true) {
+    return Promise.all([
+      one.hasMany(many, {
+        foreignKey: {
+          allowNull: nullable,
+        },
+      }),
+      many.belongsTo(one, {
+        foreignKey: {
+          allowNull: nullable,
+        },
+      }),
+    ]);
   }
   createOneToOne(one, two) {
-    one.hasOne(two);
-    two.belongsTo(one);
+    return Promise.all([one.hasOne(two), two.belongsTo(one)]);
   }
-  createAssociations() {
+  async createAssociations() {
     const { FileInfo, FileFormat, ConversionConfiguration, ConversionInfo } =
       this.models;
-    this.createOneToMany(FileFormat, FileInfo);
-    this.createOneToMany(FileFormat, ConversionConfiguration);
-    this.createOneToMany(ConversionConfiguration, ConversionInfo);
-    FileInfo.belongsToMany(FileInfo, {
+    await this.createOneToMany(FileFormat, FileInfo, false);
+    await this.createOneToMany(FileFormat, ConversionConfiguration);
+    await this.createOneToMany(ConversionConfiguration, ConversionInfo);
+
+    await FileInfo.belongsToMany(FileInfo, {
       through: ConversionInfo,
       otherKey: "converted_id",
       foreignKey: "original_id",

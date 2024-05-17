@@ -2,11 +2,10 @@ const { Model } = require("sequelize");
 
 class FileFormat extends Model {}
 module.exports = (sequelize, DataTypes) => {
-  FileFormat.init(
+  return FileFormat.init(
     {
-      name: DataTypes.STRING,
+      name: { type: DataTypes.STRING, unique: true },
     },
     { sequelize, tableName: "file_formats", underscored: true }
   );
-  return FileFormat;
 };

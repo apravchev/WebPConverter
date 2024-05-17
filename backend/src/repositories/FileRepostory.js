@@ -16,6 +16,7 @@ class FileRepostory {
           name: file,
           path: "public/" + file,
           size: stats?.size,
+          format: file.split(".").at(-1),
         };
       })
     );

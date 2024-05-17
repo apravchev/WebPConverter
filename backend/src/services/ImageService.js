@@ -2,18 +2,20 @@ const FileInfo = require("../models").FileInfo;
 
 class ImageService {
   iRepo;
-  fRepo;
+  fileRepo;
+  formatRepo;
   constructor() {
-    this.iRepo = require("../repositories/imageRepository");
-    this.fRepo = require("../repositories/FileRepostory");
+    this.iRepo = require("../repositories/ImageRepository");
+    this.fileRepo = require("../repositories/FileRepostory");
+    this.formatRepo = require("../repositories/FileFormatRepository");
   }
   add = async (req, res) => {
     try {
-      await this.fRepo.upload(req, res);
+      await this.fileRepo.upload(req, res);
       if (!req.files || req.files.length === 0) {
         return res.status(400).send({ message: "Please upload a file!" });
       }
-      req.files.forEach(async (file) => await this._createImage(file));
+      this.createImages(req.files);
       res.status(200).send({
         message: "Uploaded the files successfully: ",
       });
@@ -23,43 +25,56 @@ class ImageService {
       });
     }
   };
-  get = async (req, res) => {
-    const id = req.query.id;
-    const query = req.query.query;
-    console.log(req.query);
+  addMultiple() {}
+  async createImages(images) {
+    const formats = [];
+    images.forEach(async (image) => {
+      const fileFormat = image.name.split(".").at(-1).toLowerCase();
+      let format = formats.find((form) => form.name == fileFormat);
+      if (!format) {
+        format = await this.formatRepo.findByName(fileFormat);
+      }
 
-    if (id) {
-      const files = await this.iRepo.getImageById(id);
-      console.log(files);
-      return res.status(200).send({ files: [files] });
-    } else {
-      const files = await this.iRepo.getAllImages();
-      console.log(files);
-      return res.status(200).send({ files: files });
-    }
-  };
-  getImageBySearch(req, res) {}
-  delete = async (req, res) => {};
-  _getAll = () => {
-    return this.fRepo.getAll();
-  };
-  async _createImage(image) {
-    return this.iRepo
-      .createImage(
+      if (!!format) {
+        formats.push(format);
+        return await this._createImage(image, format.id);
+      } else console.error("Unsupported File Format ! " + fileFormat);
+    });
+  }
+  async _createImage(image, formatId) {
+    return await this.iRepo
+      .create(
         FileInfo.build({
-          name: image.filename,
+          name: image.name || image.filename,
           size: image.size,
-          path: `public/${image.filename}`,
+          path: `public/${image.name || image.filename}`,
+          FileFormatId: formatId,
         })
       )
       .catch((err) => {
-        if (err) {
-          return err;
-        }
+        console.error(err);
       });
   }
+  get = async (req, res) => {
+    const id = req.query.id;
+    const query = req.query.query;
+    if (id) {
+      const files = await this.iRepo.getById(id);
+      return res.status(200).send({ files: [files] });
+    } else {
+      const files = await this.iRepo.getAll();
+      return res.status(200).send({ files: files });
+    }
+  };
+
+  getImageBySearch(req, res) {}
+  delete = async (req, res) => {};
+  _getFiles = () => {
+    return this.fileRepo.getAll();
+  };
+
   _getImageById(id) {
-    return this.iRepo.getImageById(id);
+    return this.iRepo.getById(id);
   }
 }
 module.exports = new ImageService();
