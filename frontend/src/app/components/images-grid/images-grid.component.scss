@@ -7,10 +7,12 @@ p-dataView {
 }
 :host::ng-deep {
   .p-paginator {
+    margin-top: auto;
     width: 100%;
     display: flex;
     justify-content: start;
     gap: 10px;
+    padding: 10px;
   }
   .p-paginator-pages {
     display: flex;
@@ -19,9 +21,16 @@ p-dataView {
   }
   button {
     width: 30px;
+    border-radius: 49px;
+    background: #e0e0e0;
+    box-shadow: inset 5px 5px 9px #c1c1c1, inset -5px -5px 9px #ffffff;
     aspect-ratio: 1/1;
     border: 0;
     border-radius: 10px;
-    box-shadow: 1px 1px 1px black;
+    transition: 0.5s;
+    &.p-highlight {
+      background-color: white;
+      box-shadow: inset 1px 1px 2px #c1c1c1, inset -1px -1px 2px #ffffff;
+    }
   }
 }

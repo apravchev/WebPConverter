@@ -7,12 +7,8 @@
     class="card h-full w-full drop-area"
   >
     <div (dragleave)="active = false" class="drop-prompt">Drop Files Here</div>
-    <div class="gallery">
-      <app-images-grid
-        [currentPage]="(page | async) || 0"
-        [total]="(total | async) || 0"
-        [images]="(images | async) || []"
-      ></app-images-grid>
+    <div class="gallery w-full h-full">
+      <app-images-grid></app-images-grid>
     </div>
   </div>
 </div>

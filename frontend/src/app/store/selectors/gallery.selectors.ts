@@ -6,15 +6,15 @@ export const getGalleryFiles = createSelector(
   gallerySelector,
   (state) => state.files || []
 );
-export const getGalleryPages = createSelector(
+export const getGalleryFirst = createSelector(
   gallerySelector,
-  (state) => state.pages || 0
+  (state) => state.first || 0
 );
-export const getGalleryActivePage = createSelector(
+export const getGalleryRows = createSelector(
   gallerySelector,
-  (state) => state.page || 0
+  (state) => state.rows || 0
 );
-export const getGalleryTotalImages = createSelector(
+export const getGalleryCount = createSelector(
   gallerySelector,
   (state) => state.count || 0
 );

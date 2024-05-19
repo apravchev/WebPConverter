@@ -7,6 +7,7 @@
   [totalRecords]="total"
   layout="grid"
   [value]="images"
+  (onLazyLoad)="loadImages($event)"
 >
   <ng-template let-image let-images pTemplate="grid">
     <div class="grid grid-nogutter">

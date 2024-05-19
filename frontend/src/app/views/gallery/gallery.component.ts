@@ -3,12 +3,6 @@ import { Store } from '@ngrx/store';
 import { ImagesGridComponent } from '../../components/images-grid/images-grid.component';
 import { AsyncPipe, NgClass, NgFor } from '@angular/common';
 import { UploadActions } from '../../store/actions/upload.actions';
-import {
-  getGalleryActivePage,
-  getGalleryFiles,
-  getGalleryPages,
-  getGalleryTotalImages,
-} from '../../store/selectors/gallery.selectors';
 import { GalleryActions } from '../../store/actions/gallery.actions';
 @Component({
   selector: 'app-gallery',
@@ -19,10 +13,6 @@ import { GalleryActions } from '../../store/actions/gallery.actions';
 })
 export class GalleryComponent implements OnInit {
   active = false;
-  images = this.store.select(getGalleryFiles);
-  pages = this.store.select(getGalleryPages);
-  page = this.store.select(getGalleryActivePage);
-  total = this.store.select(getGalleryTotalImages);
   constructor(private store: Store) {}
   onDrop(event) {
     event.preventDefault();
@@ -38,7 +28,5 @@ export class GalleryComponent implements OnInit {
     event.stopPropagation();
     event.preventDefault();
   }
-  ngOnInit(): void {
-    this.store.dispatch(GalleryActions.loadattempt({}));
-  }
+  ngOnInit(): void {}
 }
