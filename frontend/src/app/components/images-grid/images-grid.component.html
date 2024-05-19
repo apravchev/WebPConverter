@@ -1,5 +1,20 @@
-<div class="image-grid">
-  <ng-container *ngFor="let image of images">
-    <app-image-container [image]="image"></app-image-container>
-  </ng-container>
-</div>
+<p-dataView
+  [paginator]="true"
+  [totalRecords]="total"
+  [alwaysShowPaginator]="true"
+  [lazy]="true"
+  [rows]="12"
+  [totalRecords]="total"
+  layout="grid"
+  [value]="images"
+>
+  <ng-template let-image let-images pTemplate="grid">
+    <div class="grid grid-nogutter">
+      <div
+        *ngFor="let image of images"
+        class="col-12 sm:col-6 md:col-4 xl:col-3 p-2"
+      >
+        <app-image-container [image]="image"></app-image-container>
+      </div>
+    </div> </ng-template
+></p-dataView>

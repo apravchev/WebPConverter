@@ -7,8 +7,8 @@ export class GalleryState {
   files: FileInfo[] = [];
   loaded: boolean = false;
   page: number = 1;
-  total: number = 1;
   count: number = 0;
+  pages: number = 0;
   filter: FileFilter = {
     format: false,
     search: false,
@@ -20,8 +20,8 @@ const initialState: GalleryState = {
   files: [],
   loaded: false,
   count: 0,
-  page: 1,
-  total: 1,
+  page: 0,
+  pages: 0,
   filter: { format: false, search: false, date: false, size: false },
 };
 export const GalleryReducer = createReducer(
@@ -32,5 +32,6 @@ export const GalleryReducer = createReducer(
     loaded: true,
     page: res.page || 1,
     count: res.count || 0,
+    pages: res.pages,
   }))
 );

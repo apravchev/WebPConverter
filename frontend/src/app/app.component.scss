@@ -6,7 +6,7 @@
   justify-content: end;
   align-items: center;
   height: 35px;
-
+  flex-shrink: 0;
   button {
     height: 100%;
     width: 45px;

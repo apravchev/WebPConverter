@@ -1,6 +1,27 @@
-.image-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 0.5fr));
-  grid-auto-rows: 1fr;
-  gap: 20px;
+.col-12 {
+  height: 200px;
+}
+p-dataView {
+  height: 100%;
+  width: 100%;
+}
+:host::ng-deep {
+  .p-paginator {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+  }
+  .p-paginator-pages {
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+  }
+  button {
+    width: 30px;
+    aspect-ratio: 1/1;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px black;
+  }
 }

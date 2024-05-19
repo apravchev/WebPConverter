@@ -3,17 +3,13 @@
     [ngClass]="{ 'opacity-0': !display, 'opacity-1': display }"
     class="image-item"
   >
-    <img (load)="display = true" [src]="host + image.path" alt="Image" />
-    <div class="image-overlay">
-      <div class="overlay-content">
-        <button
-          class="action-button delete-button"
-          (click)="deleteImage(image)"
-        >
-          <i class="bi bi-trash-fill"></i>
-        </button>
-      </div>
-    </div>
+    <img
+      draggable="false"
+      (load)="display = true"
+      [src]="host + image.path"
+      alt="Image"
+    />
+
     <p class="image-filename">{{ image.name | filename }}</p>
   </div>
 </ng-container>

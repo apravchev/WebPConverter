@@ -1,6 +1,6 @@
 export class FileFilter {
-  format: 'webp' | 'jpeg' | 'jpg' | 'png' | false = false;
-  search: string | false = false;
+  format?: 'webp' | 'jpeg' | 'jpg' | 'png' | false = false;
+  search?: string | false = false;
   date?:
     | {
         from: Date;

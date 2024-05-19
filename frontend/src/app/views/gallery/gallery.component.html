@@ -1,15 +1,18 @@
 <div class="page">
-  <div class="query-bar card w-100">
-    <app-image-filter></app-image-filter>
-  </div>
   <div
     [ngClass]="{ active: active }"
     (drop)="onDrop($event); active = false"
     (dragover)="onDragOver($event); active = true"
     (dragend)="active = false"
-    class="card h-100 w-100 drop-area"
+    class="card h-full w-full drop-area"
   >
     <div (dragleave)="active = false" class="drop-prompt">Drop Files Here</div>
-    <app-images-grid [images]="(images | async) || []"></app-images-grid>
+    <div class="gallery">
+      <app-images-grid
+        [currentPage]="(page | async) || 0"
+        [total]="(total | async) || 0"
+        [images]="(images | async) || []"
+      ></app-images-grid>
+    </div>
   </div>
 </div>
