@@ -1,15 +1,14 @@
 <ng-container *ngIf="!!image">
-  <div
-    [ngClass]="{ 'opacity-0': !display, 'opacity-1': display }"
-    class="image-item"
-  >
+  <div class="image-item">
+    <p-skeleton
+      [ngClass]="{ 'opacity-1': !display, 'opacity-0': display }"
+      class="w-full h-full absolute top-0 left-0"
+    ></p-skeleton>
     <img
       draggable="false"
       (load)="display = true"
       [src]="host + image.path"
       alt="Image"
     />
-
-    <p class="image-filename">{{ image.name | filename }}</p>
   </div>
 </ng-container>

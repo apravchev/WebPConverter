@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UploadActions } from '../actions/upload.actions';
-import { ImageHandlerService } from '../../services/image_handler.service';
+import { ImageHandlerService } from '../../services/imageHandler.service';
 import { Observable, catchError, exhaustMap, first, map, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

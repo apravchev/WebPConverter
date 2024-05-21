@@ -5,6 +5,7 @@ import { ImageContainerComponent } from '../image-container/image-container.comp
 import { DataViewModule } from 'primeng/dataview';
 import { FileFilter } from '../../models/fileFilter';
 import { LazyLoadEvent } from 'primeng/api';
+import { PaginationData } from '../../models/paginationData';
 
 @Component({
   selector: 'app-images-grid',
@@ -18,13 +19,17 @@ export class ImagesGridComponent {
   @Input() pages: number = 0;
   @Input() currentPage: number = 0;
   @Input() total: number = 0;
-  @Output() queryChange = new EventEmitter<FileFilter>();
+  @Input() loading = false;
+  @Output() queryChange = new EventEmitter<PaginationData>();
   style: 'vertical' | 'grid' = 'vertical';
   createPages(count): any[] {
     return new Array(count).map((i, idx) => (i = idx + 1));
   }
   loadImages(ev: LazyLoadEvent) {
-    this.queryChange.emit({});
+    this.queryChange.emit({
+      first: ev.first || 0,
+      rows: ev.rows || 0,
+    });
   }
   constructor() {}
 }

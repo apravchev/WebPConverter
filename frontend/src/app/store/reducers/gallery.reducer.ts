@@ -6,12 +6,12 @@ import { PaginationData } from '../../models/paginationData';
 
 export class GalleryState extends PaginationData {
   files: FileInfo[] = [];
-  loaded: boolean = false;
+  loading: boolean = false;
   filter: FileFilter = {};
 }
 const initialState: GalleryState = {
   files: [],
-  loaded: false,
+  loading: false,
   count: 0,
   first: 0,
   rows: 0,
@@ -19,12 +19,16 @@ const initialState: GalleryState = {
 };
 export const GalleryReducer = createReducer(
   initialState,
+  on(GalleryActions.changeParams, (state, res) => ({
+    ...state,
+    loading: true,
+    first: res.first,
+    rows: res.rows,
+  })),
   on(GalleryActions.loadsuccess, (state, res) => ({
     ...state,
     files: res.files || [],
-    loaded: true,
+    loading: false,
     count: res.count || state.count,
-    first: res.first || state.first,
-    rows: res.rows || state.rows,
   }))
 );

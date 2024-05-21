@@ -18,3 +18,11 @@ export const getGalleryCount = createSelector(
   gallerySelector,
   (state) => state.count || 0
 );
+export const getGalleryLoading = createSelector(
+  gallerySelector,
+  (state) => state.loading || 0
+);
+export const getPaginationData = createSelector(gallerySelector, (state) => ({
+  first: state.first,
+  rows: state.rows,
+}));

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { routeTransitionAnimations } from './animations/route-transition';
-import { ImageHandlerService } from './services/image_handler.service';
+import { ImageHandlerService } from './services/imageHandler.service';
 import { ElectronService } from './services/electron.service';
 
 @Component({

@@ -4,11 +4,11 @@ import { NgClass, NgIf } from '@angular/common';
 import { GlobalService } from '../../services/global.service';
 import { FilesizePipe } from '../../pipes/filesize.pipe';
 import { FilenamePipe } from '../../pipes/filename.pipe';
-
+import { SkeletonModule } from 'primeng/skeleton';
 @Component({
   selector: 'app-image-container',
   standalone: true,
-  imports: [NgIf, FilesizePipe, NgClass, FilenamePipe],
+  imports: [NgIf, FilesizePipe, NgClass, FilenamePipe, SkeletonModule],
   templateUrl: './image-container.component.html',
   styleUrl: './image-container.component.scss',
 })
