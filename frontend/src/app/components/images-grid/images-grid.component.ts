@@ -6,11 +6,17 @@ import { DataViewModule } from 'primeng/dataview';
 import { FileFilter } from '../../models/fileFilter';
 import { LazyLoadEvent } from 'primeng/api';
 import { PaginationData } from '../../models/paginationData';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-images-grid',
   standalone: true,
-  imports: [ImageContainerComponent, CommonModule, DataViewModule],
+  imports: [
+    ImageContainerComponent,
+    CommonModule,
+    DataViewModule,
+    LoadingSpinnerComponent,
+  ],
   templateUrl: './images-grid.component.html',
   styleUrl: './images-grid.component.scss',
 })
@@ -19,6 +25,7 @@ export class ImagesGridComponent {
   @Input() pages: number = 0;
   @Input() currentPage: number = 0;
   @Input() total: number = 0;
+  @Input() rows: number = 0;
   @Input() loading = false;
   @Output() queryChange = new EventEmitter<PaginationData>();
   style: 'vertical' | 'grid' = 'vertical';
@@ -31,5 +38,6 @@ export class ImagesGridComponent {
       rows: ev.rows || 0,
     });
   }
+  trackByFn = (idx, image) => image.id;
   constructor() {}
 }

@@ -25,6 +25,14 @@ export const GalleryReducer = createReducer(
     first: res.first,
     rows: res.rows,
   })),
+  on(GalleryActions.changeFilter, (state, res) => ({
+    ...state,
+    loading: true,
+    filter: {
+      ...initialState.filter,
+      ...res,
+    },
+  })),
   on(GalleryActions.loadsuccess, (state, res) => ({
     ...state,
     files: res.files || [],

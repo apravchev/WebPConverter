@@ -6,11 +6,8 @@ import { PaginationData } from '../../models/paginationData';
 export const GalleryActions = createActionGroup({
   source: 'Gallery',
   events: {
-    changeParams: props<
-      {
-        filter: FileFilter;
-      } & PaginationData
-    >(),
+    changeParams: props<PaginationData>(),
+    changeFilter: props<FileFilter>(),
     loadsuccess: props<{
       files: FileInfo[];
       count: number;

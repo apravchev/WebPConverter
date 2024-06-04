@@ -1,9 +1,16 @@
 <ng-container *ngIf="!!image">
   <div class="image-item">
-    <p-skeleton
-      [ngClass]="{ 'opacity-1': !display, 'opacity-0': display }"
-      class="w-full h-full absolute top-0 left-0"
-    ></p-skeleton>
+    @if (!display) {
+    <p-skeleton class="w-full h-full absolute top-0 left-0"></p-skeleton>
+    } @else {
+    <button
+      (click)="openModal()"
+      class="absolute modal-btn w-full h-full top-0 left-0"
+    >
+      <i class="bi bi-eye"></i>
+    </button>
+    }
+
     <img
       draggable="false"
       (load)="display = true"

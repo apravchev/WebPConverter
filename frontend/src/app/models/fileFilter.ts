@@ -1,16 +1,16 @@
 export class FileFilter {
   format?: 'webp' | 'jpeg' | 'jpg' | 'png' | false = false;
-  search?: string | false = false;
+  search?: string = '';
   date?:
     | {
-        from: Date;
-        to: Date;
+        from?: Date;
+        to?: Date;
       }
     | false = false;
   size?:
     | {
-        min: number;
-        max: number;
+        min?: number | false;
+        max?: number | false;
       }
     | false;
 }

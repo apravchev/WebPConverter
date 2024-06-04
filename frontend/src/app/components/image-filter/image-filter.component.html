@@ -1,0 +1,17 @@
+<form (submit)="submitForm()" [formGroup]="filterForm" class="flex gap-2 z-3">
+  <p-iconField iconPosition="left">
+    <p-inputIcon styleClass="bi pi bi-search" />
+    <input
+      formControlName="search"
+      type="text"
+      pInputText
+      placeholder="Search"
+    />
+  </p-iconField>
+  <p-dropdown
+    appendTo="body"
+    formControlName="format"
+    optionLabel="name"
+    placeholder="Filter By Format"
+  />
+</form>

@@ -3,20 +3,33 @@
   [totalRecords]="total"
   [alwaysShowPaginator]="true"
   [lazy]="true"
-  [rows]="12"
+  [rows]="rows"
   [loading]="loading"
   [totalRecords]="total"
   layout="grid"
   [value]="images"
+  [trackBy]="trackByFn"
   (onLazyLoad)="loadImages($event)"
 >
+  <ng-template pTemplate="loadingicon">
+    <app-loading-spinner></app-loading-spinner>
+  </ng-template>
   <ng-template let-image let-images pTemplate="grid">
     <div class="grid grid-nogutter">
       <div
-        *ngFor="let image of images"
+        *ngFor="let image of images; trackBy: trackByFn"
         class="col-12 sm:col-6 md:col-4 xl:col-3 p-2"
       >
-        <app-image-container [image]="image"></app-image-container>
+        <app-image-container [image]="image" />
       </div>
-    </div> </ng-template
-></p-dataView>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="empty">
+    <div
+      class="flex flex-column w-full h-full justify-content-center align-items-center"
+    >
+      <i style="font-size: 72px" class="bi bi-question"></i>
+      <p>No results found.</p>
+    </div>
+  </ng-template></p-dataView
+>

@@ -12,13 +12,14 @@ export class ImageHandlerService {
       responseType: 'json',
     });
   };
-  getImages = (pagination: PaginationData) => {
+  getImages = (pagination: PaginationData, filter: FileFilter) => {
     return this.http.get(this.global.API_URL + '/images', {
       reportProgress: true,
       responseType: 'json',
       params: {
         first: pagination.first,
         rows: pagination.rows,
+        query: filter.search || '',
       },
     });
   };

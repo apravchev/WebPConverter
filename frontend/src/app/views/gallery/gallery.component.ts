@@ -8,12 +8,21 @@ import {
   getGalleryCount,
   getGalleryFiles,
   getGalleryLoading,
+  getGalleryRows,
 } from '../../store/selectors/gallery.selectors';
 import { PaginationData } from '../../models/paginationData';
+import { ImageFilterComponent } from '../../components/image-filter/image-filter.component';
+import { FileFilter } from '../../models/fileFilter';
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [ImagesGridComponent, NgClass, AsyncPipe, NgFor],
+  imports: [
+    ImagesGridComponent,
+    ImageFilterComponent,
+    NgClass,
+    AsyncPipe,
+    NgFor,
+  ],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss',
 })
@@ -21,6 +30,7 @@ export class GalleryComponent implements OnInit {
   images = this.store.select(getGalleryFiles);
   total = this.store.select(getGalleryCount);
   loading = this.store.select(getGalleryLoading);
+  rows = this.store.select(getGalleryRows);
   active = false;
   constructor(private store: Store) {}
   onDrop(event) {
@@ -35,11 +45,15 @@ export class GalleryComponent implements OnInit {
   }
   getImages(first: number, rows: number) {
     this.store.dispatch(
-      GalleryActions.changeParams({ first: first, rows: rows, filter: {} })
+      GalleryActions.changeParams({ first: first, rows: rows })
     );
   }
   changePage(ev: PaginationData) {
     this.getImages(ev.first, ev.rows);
+  }
+  applyFilter(ev: FileFilter) {
+    console.log(ev);
+    this.store.dispatch(GalleryActions.changeFilter(ev));
   }
   onDragOver(event) {
     event.stopPropagation();

@@ -14,3 +14,18 @@ img {
   object-fit: cover;
   user-select: none;
 }
+.modal-btn {
+  background-color: rgba(128, 128, 128, 0.637);
+  opacity: 0;
+  transition: 0.5s;
+  border: 0;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+}
+:host::ng-deep {
+  .p-skeleton {
+    height: 100% !important;
+  }
+}

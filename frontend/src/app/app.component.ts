@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { routeTransitionAnimations } from './animations/route-transition';
 import { ImageHandlerService } from './services/imageHandler.service';
 import { ElectronService } from './services/electron.service';
+import { ModalService } from './services/modals.service';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,7 @@ export class AppComponent {
       this.eService.setElectronInstance(require('electron'));
     }
   }
+
   logEvent(ev: any) {
     console.log(ev);
   }

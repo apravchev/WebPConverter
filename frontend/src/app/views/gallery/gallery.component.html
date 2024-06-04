@@ -1,4 +1,8 @@
 <div class="page">
+  <div class="card w-full p-3">
+    <app-image-filter (onFilterChange)="applyFilter($event)"></app-image-filter>
+  </div>
+
   <div
     [ngClass]="{ active: active }"
     (drop)="onDrop($event); active = false"
@@ -12,6 +16,8 @@
         (queryChange)="changePage($event)"
         [images]="(images | async) || []"
         [total]="(total | async) || 0"
+        [loading]="(loading | async) || false"
+        [rows]="(rows | async) || 0"
       ></app-images-grid>
     </div>
   </div>

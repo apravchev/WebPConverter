@@ -13,20 +13,23 @@ import { getPaginationData } from '../selectors/gallery.selectors';
 export class GalleryEffects {
   onGalleryLoadWithParams$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(GalleryActions.changeParams, UploadActions.success),
+      ofType(
+        GalleryActions.changeParams,
+        UploadActions.success,
+        GalleryActions.changeFilter
+      ),
       withLatestFrom(this.store.select(getPaginationData)),
-      exhaustMap((res) =>
-        this.iService.getImages(res[1]).pipe(
+      exhaustMap((res) => {
+        console.log(res);
+        return this.iService.getImages(res[1], res[1].filter).pipe(
           first<any>(),
           map((res: { files: FileInfo[] } & PaginationData) => ({
             type: '[Gallery] loadsuccess',
             files: res?.files || [],
-            first: res?.first || 0,
-            rows: res?.rows || 0,
             count: res?.count || 0,
           }))
-        )
-      )
+        );
+      })
     )
   );
   constructor(

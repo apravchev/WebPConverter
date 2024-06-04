@@ -25,4 +25,5 @@ export const getGalleryLoading = createSelector(
 export const getPaginationData = createSelector(gallerySelector, (state) => ({
   first: state.first,
   rows: state.rows,
+  filter: state.filter,
 }));
