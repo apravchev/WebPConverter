@@ -16,5 +16,9 @@ class FileFormatService {
   async create(format) {
     return await this.fFormatRepo.create(format);
   }
+  async getAll(req, res) {
+    const formats = await this.fFormatRepo.findAll();
+    res.code(200).send({ result: { ...formats } });
+  }
 }
 module.exports = new FileFormatService();

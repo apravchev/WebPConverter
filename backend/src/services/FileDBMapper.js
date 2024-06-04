@@ -9,17 +9,13 @@ class FileDBMapper {
     const files = await this.iService._getFiles();
     if (Array.isArray(files)) {
       await this.iService.createImages(files);
-      const dbFiles = await this.iRepo.getAll();
+      const dbFiles = await this.iRepo._getAll();
       if (dbFiles.length !== files.length) {
         const ids = [];
         dbFiles.forEach((file) => {
           if (
             !files.find((item) => {
-              return (
-                item.name == file.name &&
-                item.path == file.path &&
-                item.format == file.format
-              );
+              return item.name == file.name && item.path == file.path;
             })
           ) {
             ids.push(file.id);
