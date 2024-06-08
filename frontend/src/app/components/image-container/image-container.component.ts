@@ -29,6 +29,7 @@ export class ImageContainerComponent {
   deleteImage(image: FileInfo) {}
   display = false;
   host = this.gService.BASE_URL;
+
   constructor(
     private gService: GlobalService,
     private mService: ModalService

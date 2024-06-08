@@ -11,12 +11,14 @@ import { UploadEffects } from './store/effects/upload.effects';
 import { GalleryEffects } from './store/effects/gallery.effects';
 import { GalleryReducer } from './store/reducers/gallery.reducer';
 import { DialogService } from 'primeng/dynamicdialog';
+import { ImageEffects } from './store/effects/image.effects';
+import { ImageReducer } from './store/reducers/image.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideStore({ Gallery: GalleryReducer }),
-    provideEffects(UploadEffects, GalleryEffects),
+    provideStore({ Gallery: GalleryReducer, Image: ImageReducer }),
+    provideEffects(UploadEffects, GalleryEffects, ImageEffects),
     DialogService,
     provideAnimations(),
     provideHttpClient(),

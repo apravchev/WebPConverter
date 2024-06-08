@@ -1,0 +1,50 @@
+.img-show {
+  padding: 10px;
+  display: grid;
+  grid-template-rows: 65% 1fr;
+  grid-template-columns: 70% 1fr;
+  height: 100%;
+  gap: 20px;
+  & > * {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.514);
+    border-radius: 20px;
+    color: white;
+  }
+}
+.img-main {
+  &.full {
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px black;
+  }
+}
+.actions {
+  button {
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 18px;
+    display: flex;
+    gap: 10px;
+    text-align: start;
+    cursor: pointer;
+    transition: 0.5s;
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+}
+.info p {
+  overflow-wrap: anywhere;
+  min-width: 100%;
+}

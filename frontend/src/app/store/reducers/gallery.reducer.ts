@@ -3,11 +3,12 @@ import { FileFilter } from '../../models/fileFilter';
 import { FileInfo } from '../../models/fileInfo';
 import { GalleryActions } from '../actions/gallery.actions';
 import { PaginationData } from '../../models/paginationData';
+import { Loadable } from './loadable.class';
 
-export class GalleryState extends PaginationData {
+export class GalleryState extends PaginationData implements Loadable {
   files: FileInfo[] = [];
-  loading: boolean = false;
   filter: FileFilter = {};
+  loading: boolean = false;
 }
 const initialState: GalleryState = {
   files: [],

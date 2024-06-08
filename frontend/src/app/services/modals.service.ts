@@ -18,7 +18,7 @@ export class ModalService {
       height: '100%',
       focusTrap: true,
       showHeader: false,
-
+      styleClass: 'image-modal',
       data: {
         image,
       },

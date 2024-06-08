@@ -1,8 +1,8 @@
 <div class="app">
   <nav class="control">
-    <button class="bi bi-dash"></button>
+    <button (click)="minimise()" class="bi bi-dash"></button>
     <button class="bi bi-app"></button>
-    <button class="bi bi-x-lg"></button>
+    <button (click)="close()" class="bi bi-x-lg"></button>
   </nav>
   <div class="app-window">
     <nav class="card navigation hoverable">

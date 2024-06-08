@@ -1,3 +1,27 @@
-<div>
-  <img [src]="image?.path" alt="" />
+<div class="img-show">
+  <div [ngClass]="{ full: (offspring || []).length <= 0 }" class="img-main">
+    <img [src]="baseUrl + image?.path" alt="" />
+  </div>
+  <div class="info p-3 flex gap-3 flex-column">
+    <div class="card">
+      <p class="flex gap-3">
+        <i class="bi bi-file-richtext h-full"></i>{{ image?.name }}
+      </p>
+    </div>
+    <div class="card">
+      <p class="flex gap-3">
+        <i class="bi bi-hdd"></i>{{ image?.size || 0 | filesize }}
+      </p>
+    </div>
+  </div>
+  <div *ngIf="(offspring || []).length > 0"></div>
+  <div class="actions p-3 flex flex-column gap-3 justify-content-center">
+    <button (click)="deleteImage(image?.id)">
+      <i class="bi bi-trash"></i>Delete
+    </button>
+    <button><i class="bi bi-image-alt"></i>Convert</button>
+    <p class="text-base">
+      Approximately {{ (image?.size || 0) * 0.24 | filesize }} size reduction
+    </p>
+  </div>
 </div>
