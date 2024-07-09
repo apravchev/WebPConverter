@@ -1,4 +1,5 @@
 const FileInfo = require("../models").FileInfo;
+const FileFormat = require("../models").FileFormat;
 const { Op } = require("sequelize");
 /**
  * Handles Database Image Entires
@@ -34,6 +35,7 @@ class ImageRepository {
   async getById(id) {
     const options = {
       where: { id },
+      include: FileFormat,
     };
     return await FileInfo.findOne(options);
   }
@@ -52,16 +54,28 @@ class ImageRepository {
   async _getAll() {
     return await FileInfo.findAll();
   }
-
-  async deleteByIds(ids) {
-    if (Array.isArray(ids) && ids.length > 0) {
-      return await FileInfo.destroy({
+  async deleteById(id) {
+    if (!!id) {
+      const options = {
         where: {
           id: {
-            [Op.in]: ids,
+            [Op.eq]: id,
           },
         },
-      });
+      };
+      return await FileInfo.destroy(options);
+    }
+  }
+  async deleteByIds(ids) {
+    const options = {
+      where: {
+        id: {
+          [Op.in]: ids,
+        },
+      },
+    };
+    if (Array.isArray(ids) && ids.length > 0) {
+      return await FileInfo.destroy(options);
     }
   }
 }

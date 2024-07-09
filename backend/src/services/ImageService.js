@@ -19,14 +19,14 @@ class ImageService {
       files.forEach((file) => {
         file.name = file.filename;
       });
-      await this.createImages(files);
+      await this.create(files);
       res.status(200).send({ message: "Uploaded the files successfully." });
     } catch (err) {
       res.status(500).send({ message: `Could not upload the files: ${err}` });
     }
   };
 
-  createImages = async (images) => {
+  create = async (images) => {
     console.log(images);
     for (const image of images) {
       const fileFormat = image.name.split(".").at(-1).toLowerCase();
@@ -76,7 +76,23 @@ class ImageService {
   };
 
   delete = async (req, res) => {
-    // Implement delete functionality
+    let { id } = req.query;
+    try {
+      const file = await this.iRepo.getById(id);
+      if (!!file) {
+        await this.fileRepo.delete(file);
+        await this.iRepo.deleteById(id);
+        res.status(200).send({
+          message: "File Deleted Successfully",
+        });
+      } else {
+        res.send(500).send({
+          message: "Error Deleting file: ",
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   _getFiles = () => {

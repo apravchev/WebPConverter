@@ -3,7 +3,7 @@ const ImageService = require("../services/ImageService");
 
 class ImageController {
   upload = (req, res) => ImageService.add(req, res);
-  delete = (req, res) => ImageService.delete();
+  delete = (req, res) => ImageService.delete(req, res);
   find = (req, res) => ImageService.get(req, res);
   sync = () => FileDBMapper.sync();
 }

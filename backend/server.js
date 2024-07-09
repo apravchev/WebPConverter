@@ -1,14 +1,16 @@
+const PORT = process.env.PORT || 3000;
+global.__basedir = __dirname;
+global.__PORT = PORT;
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
-const PORT = process.env.PORT || 3000;
+
 const db = require("./src/models");
 const initialize = require("./src/init");
 const compression = require("compression");
-global.__basedir = __dirname;
-global.__PORT = PORT;
+
 // Middleware
 app.use(
   cors({

@@ -8,7 +8,7 @@ class FileDBMapper {
   async sync() {
     const files = await this.iService._getFiles();
     if (Array.isArray(files)) {
-      await this.iService.createImages(files);
+      await this.iService.create(files);
       const dbFiles = await this.iRepo._getAll();
       if (dbFiles.length !== files.length) {
         const ids = [];
