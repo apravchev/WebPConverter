@@ -14,7 +14,7 @@ export const ImageDeleteActions = createActionGroup({
   source: 'Image Delete',
   events: {
     ...BasicActions,
-    attempt: props<{ id: String }>(),
+    attempt: props<{ id: string }>(),
     success: emptyProps(),
   },
 });

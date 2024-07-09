@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ImageDeleteActions, ImageLoadActions } from '../actions/image.actions';
 import { exhaustMap, first, map, pipe } from 'rxjs';
-import { ImagesService } from '../../services/images.service';
+import { ImageHandlerService } from '../../services/imageHandler.service';
 
 @Injectable({ providedIn: 'root' })
 export class ImageEffects {
@@ -34,5 +34,8 @@ export class ImageEffects {
       )
     )
   );
-  constructor(private $actions: Actions, private iService: ImagesService) {}
+  constructor(
+    private $actions: Actions,
+    private iService: ImageHandlerService
+  ) {}
 }

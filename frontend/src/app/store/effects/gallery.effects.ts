@@ -8,6 +8,7 @@ import { PaginationData } from '../../models/paginationData';
 import { FileInfo } from '../../models/fileInfo';
 import { Store } from '@ngrx/store';
 import { getPaginationData } from '../selectors/gallery.selectors';
+import { ImageDeleteActions } from '../actions/image.actions';
 
 @Injectable({ providedIn: 'root' })
 export class GalleryEffects {
@@ -16,7 +17,8 @@ export class GalleryEffects {
       ofType(
         GalleryActions.changeParams,
         UploadActions.success,
-        GalleryActions.changeFilter
+        GalleryActions.changeFilter,
+        ImageDeleteActions.success
       ),
       withLatestFrom(this.store.select(getPaginationData)),
       exhaustMap((res) => {

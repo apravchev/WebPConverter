@@ -17,7 +17,7 @@ import { ImageDeleteActions } from '../../store/actions/image.actions';
 export class ModalImageComponent {
   image?: FileInfo;
   offspring?: FileInfo[] = [];
-  deleteImage(id?: String) {
+  deleteImage(id?: string) {
     if (!!id) {
       this.dRef.close();
       this.store.dispatch(ImageDeleteActions.attempt({ id }));

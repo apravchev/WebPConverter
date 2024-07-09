@@ -1,9 +1,9 @@
 export class FileInfo {
-  id: String = '';
-  name: String = '';
+  id: string = '';
+  name: string = '';
   size: number = 0;
-  path: String = '';
-  format: String = '';
+  path: string = '';
+  format: string = '';
   original?: FileInfo;
   converted?: FileInfo[];
 }

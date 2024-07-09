@@ -23,11 +23,19 @@ export class ImageHandlerService {
       },
     });
   };
+  loadImage = (id: String) =>
+    this.http.get(this.global.API_URL + '/image/' + id);
   filterImages = (filter?: FileFilter) => {
     return this.http.get(this.global.API_URL + '/images', {
       responseType: 'json',
       params: { query: filter?.search || '' },
     });
   };
+  deleteImage = (id: string) =>
+    this.http.delete(this.global.API_URL + '/images', {
+      responseType: 'json',
+      params: { id },
+    });
+
   constructor(private http: HttpClient, private global: GlobalService) {}
 }
